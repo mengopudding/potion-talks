@@ -5,6 +5,7 @@
               {description,"potiontalks"},
               {modules,['Elixir.Potiontalks','Elixir.Potiontalks.Application',
                         'Elixir.Potiontalks.DataCase',
+                        'Elixir.Potiontalks.Message',
                         'Elixir.Potiontalks.Repo','Elixir.PotiontalksWeb',
                         'Elixir.PotiontalksWeb.ChannelCase',
                         'Elixir.PotiontalksWeb.ChatRoomChannel',
