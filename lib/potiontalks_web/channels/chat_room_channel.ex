@@ -3,6 +3,8 @@ defmodule PotiontalksWeb.ChatRoomChannel do
 
   def join("chat_room:lobby", payload, socket) do
     if authorized?(payload) do
+      # display recent messages when a user joins the channel
+      send(self(), :after_join)
       {:ok, socket}
     else
       {:error, %{reason: "unauthorized"}}
@@ -21,6 +23,11 @@ defmodule PotiontalksWeb.ChatRoomChannel do
   def handle_in("new_message", payload, socket) do
     spawn(fn -> save_message(payload) end)
     broadcast! socket, "new_message", payload
+    {:noreply, socket}
+  end
+
+  # after socket has been connected
+  def handle_info(:after_join, socket) do
     {:noreply, socket}
   end
 
