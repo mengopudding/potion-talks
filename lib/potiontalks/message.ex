@@ -15,4 +15,9 @@ defmodule Potiontalks.Message do
     |> cast(attrs, [:name, :message])
     |> validate_required([:name, :message])
   end
+
+  # doc fetching most recent messages
+  def recent_messages(limit \\ 10) do
+    Potiontalks.Repo.all(Potiontalks.Message, limit: limit)
+  end
 end

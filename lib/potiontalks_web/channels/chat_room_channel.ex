@@ -28,6 +28,8 @@ defmodule PotiontalksWeb.ChatRoomChannel do
 
   # after socket has been connected
   def handle_info(:after_join, socket) do
+    Potiontalks.Message.recent_messages()
+    |> Enum.each(fn msg -> push(socket, "new_message", format_msg(msg)) end)
     {:noreply, socket}
   end
 
@@ -39,5 +41,12 @@ defmodule PotiontalksWeb.ChatRoomChannel do
   defp save_message(message) do
   Potiontalks.Message.changeset(%Potiontalks.Message{}, message)
     |> Potiontalks.Repo.insert
-end
+  end
+
+  defp format_msg(msg) do
+    %{
+      name: msg.name,
+      message: msg.message
+    }
+  end
 end
