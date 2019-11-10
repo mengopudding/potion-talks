@@ -17,8 +17,10 @@ defmodule PotiontalksWeb.ChatRoomChannel do
 
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (chat_room:lobby).
-  def handle_in("shout", payload, socket) do
-    broadcast socket, "shout", payload
+  # Calls Kernel.spawn/1 to handle handle traffic efficiently and Save each message as it comes in
+  def handle_in("new_message", payload, socket) do
+    spawn(fn -> save_message(payload) end)
+    broadcast! socket, "new_message", payload
     {:noreply, socket}
   end
 
@@ -26,4 +28,9 @@ defmodule PotiontalksWeb.ChatRoomChannel do
   defp authorized?(_payload) do
     true
   end
+
+  defp save_message(message) do
+  Potiontalks.Message.changeset(%Potiontalks.Message{}, message)
+    |> Potiontalks.Repo.insert
+end
 end
