@@ -7,6 +7,7 @@
                         'Elixir.Potiontalks.DataCase',
                         'Elixir.Potiontalks.Repo','Elixir.PotiontalksWeb',
                         'Elixir.PotiontalksWeb.ChannelCase',
+                        'Elixir.PotiontalksWeb.ChatRoomChannel',
                         'Elixir.PotiontalksWeb.ConnCase',
                         'Elixir.PotiontalksWeb.Endpoint',
                         'Elixir.PotiontalksWeb.ErrorHelpers',

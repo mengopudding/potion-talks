@@ -3,6 +3,7 @@ defmodule PotiontalksWeb.UserSocket do
 
   ## Channels
   # channel "room:*", PotiontalksWeb.RoomChannel
+  channel "chat_room:lobby", PotiontalksWeb.ChatRoomChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
